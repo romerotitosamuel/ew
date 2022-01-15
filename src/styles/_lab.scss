@@ -1,0 +1,15 @@
+
+.labBody {
+    display: grid;
+    grid-template-columns: 0.3fr 1fr 1fr;
+
+    .labList {
+        grid-column: 1;
+    }
+    .labEdit {
+        grid-column: 2;
+    }
+    .labShow {
+        grid-column: 3;
+    }
+}
