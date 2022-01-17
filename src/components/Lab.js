@@ -1,15 +1,23 @@
 import React, { useState, useEffect } from 'react'
 import firebaseApp from '../credentials'
 import { getFirestore, doc, setDoc, collection, getDocs, orderBy, query, deleteDoc, getDoc } from 'firebase/firestore'
-import { downHalfTone, divisor } from './functions'
+import { downHalfTone } from './functions'
 const db = getFirestore(firebaseApp)
 
+
 const Lab = () => {
-    
+
+    const ejecutar = (rr) => {
+        console.log(rr)
+    }
+
     const [songs, setSongs] = useState([])
     const [visualData, setVisualData] = useState({})
     const [edition, setEdition] = useState(false)
     const [idToUpdate, setIdToUpdate] = useState('')
+    const [songArray, setSongArray] = useState([])
+
+
 
     const getSongs = async () => {
         const songsSnap = await getDocs(query(collection(db, "canciones"), orderBy("artista")))
@@ -31,6 +39,7 @@ const Lab = () => {
     const printVisual = async (visualId) => {
         let visualDataSnap = await getDoc(doc(db, "canciones", visualId))
         let pushed = Object.assign(visualDataSnap.data(), { id: visualId })
+        setSongArray(pushed.letra.split(['\n\n']))
         setVisualData(pushed)
     }
     const handlerSubmit = async (e) => {
@@ -78,13 +87,6 @@ const Lab = () => {
         let nuevo = downHalfTone(contenido.textContent)
         contenido.textContent = nuevo
     }
-    const ejecutar = () => {
-        let contenido = document.getElementById('vis')
-        let nuevo = divisor(contenido.textContent)
-        contenido.textContent = nuevo
-
-     }
-
     useEffect(() => getSongs(), [])
 
     return (<>
@@ -109,15 +111,27 @@ const Lab = () => {
             </div>
 
             <div className='labShow'>
-                <h3>Vista previa   <i className="material-icons" onClick={() => modoEditar(visualData.id)}>edit</i></h3>    
+                <h3>Vista previa   <i className="material-icons" onClick={() => modoEditar(visualData.id)}>edit</i></h3>
                 <div className='prevEncabezado'>
                     {visualData.titulo} - <small>{visualData.artista}</small>
                 </div>
                 <div className='prevContenido'>
-                    <pre>{visualData.letra}</pre><br /><hr /><br />
                     <pre id='vis'>{visualData.acordes}</pre>
+                    <hr /><br /><hr />
+                    <pre>
+                        {songArray.map((r) => {
+
+                            if (r.substr(0, 4) === 'CORO') {
+                                return (<div><b>{r.slice(5)}</b> <br /> </div>)
+                            }
+                            return (<div>{r} <br /> </div>)
+                        })}
+                    </pre>
+
 
                 </div>
+
+
             </div>
 
             <div className='labEdit'>
