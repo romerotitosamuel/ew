@@ -4,7 +4,6 @@ import { getFirestore, doc, setDoc, collection, getDocs, orderBy, query, deleteD
 import { downHalfTone } from './functions'
 const db = getFirestore(firebaseApp)
 
-
 const Lab = () => {
 
     const ejecutar = (rr) => {
@@ -16,8 +15,6 @@ const Lab = () => {
     const [edition, setEdition] = useState(false)
     const [idToUpdate, setIdToUpdate] = useState('')
     const [songArray, setSongArray] = useState([])
-
-
 
     const getSongs = async () => {
         const songsSnap = await getDocs(query(collection(db, "canciones"), orderBy("artista")))
@@ -36,12 +33,14 @@ const Lab = () => {
         }
         window.location.reload()
     }
+
     const printVisual = async (visualId) => {
         let visualDataSnap = await getDoc(doc(db, "canciones", visualId))
         let pushed = Object.assign(visualDataSnap.data(), { id: visualId })
         setSongArray(pushed.letra.split(['\n\n']))
         setVisualData(pushed)
     }
+
     const handlerSubmit = async (e) => {
         e.preventDefault()
 
@@ -82,11 +81,13 @@ const Lab = () => {
         printVisual(id)
         setIdToUpdate(id)
     }
+
     const ejecutarBajar = () => {
         let contenido = document.getElementById('vis')
         let nuevo = downHalfTone(contenido.textContent)
         contenido.textContent = nuevo
     }
+
     useEffect(() => getSongs(), [])
 
     return (<>
@@ -127,11 +128,7 @@ const Lab = () => {
                             return (<div>{r} <br /> </div>)
                         })}
                     </pre>
-
-
                 </div>
-
-
             </div>
 
             <div className='labEdit'>
