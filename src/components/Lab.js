@@ -3,7 +3,7 @@ import firebaseApp from '../credentials'
 import { getFirestore, doc, setDoc, collection, getDocs, orderBy, query, deleteDoc, getDoc } from 'firebase/firestore'
 import { downHalfTone } from './functions'
 const db = getFirestore(firebaseApp)
-
+//Prueba de guardado
 const Lab = () => {
 
     const ejecutar = (rr) => {
