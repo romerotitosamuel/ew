@@ -5,6 +5,7 @@
     height: 100%;
     .addHeader {
         min-height: 60px;
+        max-height: 60px;
         background-color: $secondaryColor;
         color: $primaryColor;
         display: flex;

@@ -1,0 +1,13 @@
+.homePage {
+    max-width: 800px;
+    margin: auto;
+    .homeHeader {
+        min-height: 60px;
+        background-color: $secondaryColor;
+        padding-left: 10px;
+        
+        img {
+            margin-top: 10px;
+        }
+    }
+}
