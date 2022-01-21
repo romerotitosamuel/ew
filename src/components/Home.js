@@ -9,7 +9,8 @@ const Home = () => {
                 <img src={logo50} alt="No hay logo" />
             </div>
             <i className="material-icons" >preview</i>
-            <Link to='/add'>Hacia add</ Link>
+            <Link to='/add'>Hacia add</ Link> <br />
+            <Link to='/lab'>Hacia Lab</ Link>
         </div>
 
     </>)
