@@ -11,15 +11,22 @@ const Home = () => {
 
     const getSongsDom = async () => {
 
-        console.log(window.navigator.onLine)
-        const arraySnap = await getDoc(doc(db, 'domingo', 'listDom'))
-        const arraySongs = arraySnap.data().dom
-        arraySongs.forEach(async (s) => {
-            const songSnap = await getDoc(doc(db, 'canciones', s))
-            setSongsDom(songsDom => [...songsDom, songSnap.data()])
-        })
-
-
+        if(window.navigator.onLine){
+            
+            const arraySnap = await getDoc(doc(db, 'domingo', 'listDom'))
+            const arraySongs = arraySnap.data().dom
+            let paraLocal = []
+            
+            arraySongs.forEach(async (s) => {
+                const songSnap = await getDoc(doc(db, 'canciones', s))
+                const songWId = Object.assign(songSnap.data() , {id: s})
+                setSongsDom(songsDom => [...songsDom, songWId])
+                paraLocal.push(songWId)
+            })
+        }else{
+            console.log("no hay internet")
+            setSongsDom(JSON.parse(localStorage.getItem('localSongsDom')))
+        }
     }
 
     const enviarSong = (titulo, artista, bpm, url, letra, acordes) => {
@@ -28,6 +35,8 @@ const Home = () => {
     }
     useEffect(() => getSongsDom(), [])
 
+    if(window.navigator.onLine) { localStorage.setItem('localSongsDom', JSON.stringify(songsDom)) }
+    
     return (<>
         <div className='homePage'>
             <div className='homeHeader'>
@@ -39,8 +48,8 @@ const Home = () => {
                     songsDom.map((s) => {
                         return (
 
-                            <Link to='./add' className='link'>
-                                <div className='filaSong' onClick={() => enviarSong(s.titulo, s.artista, s.bpm, s.url, s.letra, s.acrodes)}>
+                            <Link to='./content' className='link' key={s.id}>
+                                <div className='filaSong' onClick={() => enviarSong(s.titulo, s.artista, s.bpm, s.url, s.letra, s.acordes)}>
                                     {s.titulo} <small>- {s.artista}</small>
                                 </div>
                             </Link>

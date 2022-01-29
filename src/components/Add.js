@@ -26,7 +26,8 @@ const Add = () => {
         let arrayDom = arrayDomSnap.data().dom
         arrayDom.forEach( async (s) => {
             let songSnap = await getDoc(doc(db, 'canciones', s))
-            setSongsDom(songsDom => [...songsDom , songSnap.data()])
+            let songWId = Object.assign(songSnap.data(), {id: s})
+            setSongsDom(songsDom => [...songsDom , songWId])
         })
 
     }
@@ -64,7 +65,7 @@ const Add = () => {
             <div className='addAdded'>
 
                 {songsDom.map( (s) => {
-                    return( <div className='cancionesAdded'>
+                    return( <div className='cancionesAdded' key={s.id}>
                         {s.titulo}<small> - {s.artista}</small>
                     </div> )
                 })

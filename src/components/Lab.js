@@ -15,6 +15,8 @@ const Lab = () => {
     const [edition, setEdition] = useState(false)
     const [idToUpdate, setIdToUpdate] = useState('')
     const [songArray, setSongArray] = useState([])
+    const [acordeArray, setAcordeArray] = useState([])
+
 
     const getSongs = async () => {
         const songsSnap = await getDocs(query(collection(db, "canciones"), orderBy("artista")))
@@ -38,6 +40,7 @@ const Lab = () => {
         let visualDataSnap = await getDoc(doc(db, "canciones", visualId))
         let pushed = Object.assign(visualDataSnap.data(), { id: visualId })
         setSongArray(pushed.letra.split(['\n\n']))
+        setAcordeArray(pushed.acordes.split(['\n']))
         setVisualData(pushed)
     }
 
@@ -83,9 +86,14 @@ const Lab = () => {
     }
 
     const ejecutarBajar = () => {
-        let contenido = document.getElementById('vis')
-        let nuevo = downHalfTone(contenido.textContent)
-        contenido.textContent = nuevo
+        let contenido = document.getElementsByClassName('chord')
+
+        for (let i = 0; i < contenido.length; i = i + 1) {
+            console.log(contenido[i].textContent)
+            let nuevo = downHalfTone(contenido[i].textContent)
+            contenido[i].textContent = nuevo
+        }
+
     }
 
     useEffect(() => getSongs(), [])
@@ -117,7 +125,23 @@ const Lab = () => {
                     {visualData.titulo} - <small>{visualData.artista}</small>
                 </div>
                 <div className='prevContenido'>
-                    <pre id='vis'>{visualData.acordes}</pre>
+
+
+                    <pre id='vis'>
+                        {acordeArray.map((line) => {
+                            const m = line.substr(0, 2)
+                            if (m === "In" || m === "So" || m === "Pu" || m === " " || m === "  " || m === "   " || m === "    " || m === "     " || m === "     " || m === "C " || m === "Cm" || m === "C#" || m === "D " || m === "Dm" || m === "D#" || m === "Eb" || m === "E " || m === "Em" || m === "F " || m === "Fm" || m === "F#" || m === "G " || m === "Gm" || m === "G#" || m === "A " || m === "Am" || m === "A#" || m === "Bb" || m === "B " || m === "Bm") {
+                                return (<div className='chord'> {line}</div>)
+                            } else {
+                                return (<div>{line}</div>)
+                            }
+                        })
+                        }
+
+                    </pre>
+
+
+
                     <hr /><br /><hr />
                     <pre>
                         {songArray.map((r) => {

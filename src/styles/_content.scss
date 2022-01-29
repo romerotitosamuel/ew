@@ -1,0 +1,80 @@
+.contentAll {
+    max-width: 800px;
+    margin: auto;
+    .contentHeader {
+        position: sticky;
+        top: 0;
+        min-height: 72px;
+        background-color: $secondaryColor;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        max-height: 72px;
+        padding-left: 1px;
+        border-bottom: gray solid 1px;
+        .headerLeft {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            color: $primaryColor;
+            div {
+                user-select: none;
+            }
+            .material-icons {
+                color: $primaryColor;
+                margin: 10px;
+                cursor: pointer;
+            }
+            small {
+                color: gray;
+            }
+        }
+        .vidRight {
+            align-items: center;
+        }
+    }
+    .contentArea {
+        
+        
+        
+        margin-bottom: 50px;
+        color: white;
+        padding: 20px;
+        
+        .contentLetra {
+            pre {
+                font-family: "Ubuntu", sans-serif;
+            }
+        }
+        .contentAcordes {
+            
+            pre {
+                font-family: "Ubuntu", sans-serif;
+                .chord {
+                    color: $primaryColor;
+                }
+            }
+        }
+    }
+    .blockButtons {
+        cursor: pointer;
+        user-select: none;
+        border-top: gray solid 1px;
+        background-color: $secondaryColor;
+        color: $primaryColor;
+        width: 100%;
+        min-height: 50px;
+        max-height: 50px;
+        position: fixed;
+        
+
+        bottom: 0;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        .material-icons {
+            color: $primaryColor;
+            
+        }
+    }
+}
