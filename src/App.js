@@ -5,6 +5,7 @@ import Lab from './components/Lab'
 import Add from './components/Add'
 import Home from './components/Home'
 import Content from './components/Content'
+import Lib from './components/Lib'
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path="/add" element={<Add/>} />
           <Route path="/lab" element={<Lab/>} />
           <Route path="/content" element={<Content/>} />
+          <Route path="/lib" element={<Lib/>} />
 
         </Routes>
 

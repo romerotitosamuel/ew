@@ -1,0 +1,36 @@
+.libPage {
+    max-width: 800px;
+    margin: auto;
+    .headerLib{
+        position: sticky;
+        top: 0;
+        display: flex;
+        justify-content: left;
+        align-items: center;
+        position: sticky;
+        height: 50px;
+        border-bottom: $primaryColor 1px solid;
+        .material-icons {
+            color: $primaryColor;
+            margin-left: 10px;
+        }
+        div {
+            margin-left: 10px;
+            color: white;
+        }
+    }
+    .libArea {
+        padding: 15px;
+        .link {
+            text-decoration: none;
+            .filaSong {
+                color: white;
+                border-bottom: gray solid 1px;
+                padding: 10px;
+                small {
+                    color: gray;
+                }
+            }
+        }
+    }
+}

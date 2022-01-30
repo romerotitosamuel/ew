@@ -1,26 +1,33 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
-import { useEffect } from 'react/cjs/react.development'
+import { Link, useHistory } from 'react-router-dom'
 import ReactPlayer from 'react-player'
+import { downHalfTone } from './functions'
 
 
 const Content = () => {
-
+    console.log(window.navigator.userAgent)
     const [song] = useState(JSON.parse(localStorage.getItem('song')))
     const [chordOn, setChordOn] = useState(false)
-    const [tam, setTam] = useState(16)
 
     const songArray = song.letra.split(['\n\n'])
     const acordeArray = song.acordes.split(['\n'])
-    console.log(song.acordes)
 
+    const ejecutarBajar = () => {
+        let contenido = document.getElementsByClassName('chord')
 
+        for (let i = 0; i < contenido.length; i = i + 1) {
+            console.log(contenido[i].textContent)
+            let nuevo = downHalfTone(contenido[i].textContent)
+            contenido[i].textContent = nuevo
+        }
+
+    }
 
     return (<>
         <div className="contentAll">
             <div className="contentHeader">
                 <div className='headerLeft'>
-                    <Link to='/'><i className="material-icons" >chevron_left</i></Link>
+
                     <div>
                         <div ><b>{song.titulo}</b></div>
                         <div ><small>{song.artista}  </small></div>
@@ -33,7 +40,7 @@ const Content = () => {
                 </div>
 
             </div>
-            <div className="contentArea" style={{fontSize: tam}}>
+            <div className="contentArea" style={{ height: '100%' }}>
                 <div className="contentLetra" style={{ display: chordOn ? "none" : "block" }}>
                     <pre>
                         {songArray.map((r) => {
@@ -62,13 +69,15 @@ const Content = () => {
 
 
                 </div>
-                <div className="blockButtons">
-                    <Link to='/'><i className="material-icons" id="iconAtras">chevron_left</i></Link>
-                    <div onClick={() => setChordOn(false)}><i style={{borderBottom: chordOn ? 'none' : 'solid'}}className="material-icons" >description</i></div>
-                    <div onClick={() => setChordOn(true)}><i style={{borderBottom: chordOn ? 'solid' : 'none'}} className="material-icons" >music_note</i></div>
-                    <div><i style={{color: chordOn ? "#65f32d" : "gray" }} className="material-icons" >text_rotate_vertical</i></div>
-                </div>
 
+            </div>
+            <div className="blockButtons">
+                <div  ><i className="material-icons" onClick = {()=> window.history.back()}>arrow_back</i></div>
+
+                <div onClick={() => setChordOn(false)}><i style={{ borderBottom: chordOn ? 'none' : 'solid' }} className="material-icons" >description</i></div>
+                <div onClick={() => setChordOn(true)}><i style={{ borderBottom: chordOn ? 'solid' : 'none' }} className="material-icons" >music_note</i></div>
+                <div><i style={{ color: chordOn ? "#65f32d" : "gray" }} onClick={() => ejecutarBajar()} className="material-icons" >text_rotate_vertical</i></div>
+                
             </div>
         </div>
 

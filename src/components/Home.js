@@ -11,19 +11,19 @@ const Home = () => {
 
     const getSongsDom = async () => {
 
-        if(window.navigator.onLine){
-            
+        if (window.navigator.onLine) {
+
             const arraySnap = await getDoc(doc(db, 'domingo', 'listDom'))
             const arraySongs = arraySnap.data().dom
             let paraLocal = []
-            
+
             arraySongs.forEach(async (s) => {
                 const songSnap = await getDoc(doc(db, 'canciones', s))
-                const songWId = Object.assign(songSnap.data() , {id: s})
+                const songWId = Object.assign(songSnap.data(), { id: s })
                 setSongsDom(songsDom => [...songsDom, songWId])
                 paraLocal.push(songWId)
             })
-        }else{
+        } else {
             console.log("no hay internet")
             setSongsDom(JSON.parse(localStorage.getItem('localSongsDom')))
         }
@@ -35,8 +35,8 @@ const Home = () => {
     }
     useEffect(() => getSongsDom(), [])
 
-    if(window.navigator.onLine) { localStorage.setItem('localSongsDom', JSON.stringify(songsDom)) }
-    
+    if (window.navigator.onLine) { localStorage.setItem('localSongsDom', JSON.stringify(songsDom)) }
+
     return (<>
         <div className='homePage'>
             <div className='homeHeader'>
@@ -57,11 +57,17 @@ const Home = () => {
                     })
                 }
             </div>
+            <a className='youtubeArea' href="https://music.youtube.com/playlist?list=PL_FgA7_oWUXKWcagYkqu2DW9z7IC-BiOu" target="_blank">
+                <i className="material-icons" >play_circle_outline</i>
+                <div>Playlist - Youtube Music</div>
+            </a  >
 
-            <i className="material-icons" >preview</i>
-            <Link to='/add'>Hacia add</ Link> <br />
-            <Link to='/lab'>Hacia Lab</ Link>
-            <button onClick={() => getSongsDom()} >getArray</button>
+            <div className="footerHome">
+                <Link to='/'><i className="material-icons" >home</i></Link>
+                <div ><i className="material-icons" >apps</i></div>
+                <Link to='/lib'><i className="material-icons" >library_music</i></Link>
+
+            </div>
         </div>
 
     </>)

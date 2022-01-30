@@ -19,7 +19,7 @@ const Lab = () => {
 
 
     const getSongs = async () => {
-        const songsSnap = await getDocs(query(collection(db, "canciones"), orderBy("artista")))
+        const songsSnap = await getDocs(query(collection(db, "canciones"), orderBy("titulo")))
 
         songsSnap.forEach((ss) => {
             let songData = Object.assign(ss.data(), { id: ss.id })
