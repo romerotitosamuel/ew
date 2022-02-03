@@ -28,13 +28,17 @@
             margin-left: 15px;
             margin-right: 15px; 
             height: 25px;
+            outline: none;
                 
         }
         input::placeholder {
             color: gray;
+            padding: 5px;
+            margin-left: 10px;
 
             
         }
+        
     }
     .libArea {
         padding: 15px;

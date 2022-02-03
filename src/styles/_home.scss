@@ -31,6 +31,29 @@
                 }
             }
         }
+        
+    }
+    .aplications {
+        padding-top: 20px;
+        margin: auto;
+        max-width: 700px;
+        .contApp {
+            padding: 8px;
+            display: flex;
+            align-items: center;
+            padding-left: 20%;
+
+            img {
+                max-height: 70px;
+                border-radius: 15px;
+            }
+            a {
+                color: gray;
+                text-decoration: none;
+                margin-left: 15px;
+
+            }
+        }
     }
     .youtubeArea {
         cursor: pointer;
@@ -50,6 +73,7 @@
 
     }
     .footerHome {
+        cursor: pointer;
         background-color: black;
         height: 50px;
         color: $primaryColor;
