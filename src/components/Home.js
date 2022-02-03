@@ -57,6 +57,10 @@ const Home = () => {
                     })
                 }
             </div>
+            <div className="aplications">
+
+            </div>
+
             <a className='youtubeArea' href="https://music.youtube.com/playlist?list=PL_FgA7_oWUXKWcagYkqu2DW9z7IC-BiOu" target="_blank">
                 <i className="material-icons" >play_circle_outline</i>
                 <div>Playlist - Youtube Music</div>
