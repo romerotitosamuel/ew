@@ -6,7 +6,7 @@ import Add from './components/Add'
 import Home from './components/Home'
 import Content from './components/Content'
 import Lib from './components/Lib'
-import NoSleep from 'nosleep.js';
+import NoSleep from 'nosleep.js'
 
 function App() {
 

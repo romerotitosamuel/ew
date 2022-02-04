@@ -1,6 +1,6 @@
 {
-  "short_name": "Emanuel_Worship",
-  "name": "Emanuel_Worship",
+  "short_name": "Emanuel Worship",
+  "name": "Emanuel Worship",
   "icons": [
     {
       "src": "favicon.ico",
@@ -18,7 +18,7 @@
       "sizes": "512x512"
     }
   ],
-  "start_url": ".",
+  "start_url": "./",
   "display": "standalone",
   "theme_color": "#000000",
   "background_color": "#ffffff"
