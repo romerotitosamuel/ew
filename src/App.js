@@ -9,12 +9,19 @@ import Lib from './components/Lib'
 import NoSleep from 'nosleep.js'
 
 function App() {
+  let iphone = null
+
+  if (navigator.userAgent.match(navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/iPad/i) || navigator.userAgent.match(/iPod/i))) {
+    iphone = true
+  } else { iphone = false }
 
   var noSleep = new NoSleep();
-  document.addEventListener('click', function enableNoSleep() {
-    document.removeEventListener('click', enableNoSleep, false);
-    noSleep.enable();
-  }, false);
+  if (iphone == false) {
+    document.addEventListener('click', function enableNoSleep() {
+      document.removeEventListener('click', enableNoSleep, false);
+      noSleep.enable();
+    }, false);
+  }
 
   return (
     <>
